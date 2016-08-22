@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <utility>
 
 #include <ofMain.h>
 
@@ -11,7 +12,7 @@ private:
 	double steer, heading;
 	int speed;
 
-	std::vector<ofPoint> positionLog;
+	std::vector< std::pair<ofPoint, ofPoint> > positionLog;
 
 public:
 	void setup();

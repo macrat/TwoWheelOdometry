@@ -9,6 +9,8 @@ void ofApp::setup(){
 	pos.x = ofGetWidth() / 2.0;
 	pos.y = ofGetHeight() / 2.0;
 
+	positionLog.clear();
+
 	ofNoFill();
 	ofSetBackgroundColor(ofColor::black);
 	ofSetFrameRate(60);
@@ -17,7 +19,13 @@ void ofApp::setup(){
 
 
 void ofApp::update(){
-	positionLog.push_back(pos);
+	positionLog.push_back({
+		pos,
+		ofPoint(
+			pos.x + cos(heading - PI/2) * WHEEL_BASE,
+			pos.y + sin(heading - PI/2) * WHEEL_BASE
+		)
+	});
 	while(positionLog.size() >= 240){
 		positionLog.erase(positionLog.begin());
 	}
@@ -43,9 +51,11 @@ void ofApp::update(){
 
 
 void ofApp::draw(){
-	ofSetColor(ofColor::blue, 64);
-	for(ofPoint p: positionLog){
-		ofDrawCircle(p, 8);
+	for(auto p: positionLog){
+		ofSetColor(ofColor::green, 64);
+		ofDrawCircle(p.first, 6);
+		ofSetColor(ofColor::blue, 64);
+		ofDrawCircle(p.second, 6);
 	}
 
 	ofPushMatrix();
