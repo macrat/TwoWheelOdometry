@@ -34,17 +34,14 @@ void ofApp::update(){
 			static_cast<float>(pos.y + cos(-heading + PI/2) * center_distance)
 		};
 
-		ofSetColor(ofColor::blue);
-		ofDrawCircle(center_pos, 8);
-
 		const double run_angle = speed / center_distance;
-		const double shift_angle = PI/2 - (PI - run_angle) / 2.0;
-		const double shift_length = sin(run_angle) * center_distance / sin(run_angle);
+		const double shift_angle = (PI - run_angle) / 2.0;
+		const double shift_length = center_distance * sin(run_angle) / sin((PI - run_angle) / 2.0);
 
 		if(speed != 0){
-			heading += shift_angle;
-			pos.x = center_pos.x + cos(heading + PI) * shift_length;
-			pos.y = center_pos.y + sin(heading + PI) * shift_length;
+			pos.x += cos(heading - shift_angle) * shift_length;
+			pos.y += sin(heading - shift_angle) * shift_length;
+			heading += PI/2 - shift_angle;
 		}
 	}
 }
