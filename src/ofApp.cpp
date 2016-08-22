@@ -29,14 +29,9 @@ void ofApp::update(){
 		const double center_angle = PI/2 - steer;
 		const double center_distance = WHEEL_BASE * cos(steer) / cos(center_angle);
 
-		const ofPoint center_pos{
-			static_cast<float>(pos.x + sin(-heading + PI/2) * center_distance),
-			static_cast<float>(pos.y + cos(-heading + PI/2) * center_distance)
-		};
-
 		const double run_angle = speed / center_distance;
 		const double shift_angle = (PI - run_angle) / 2.0;
-		const double shift_length = center_distance * sin(run_angle) / sin((PI - run_angle) / 2.0);
+		const double shift_length = center_distance * sin(run_angle) / sin(shift_angle);
 
 		if(speed != 0){
 			pos.x += cos(heading - shift_angle) * shift_length;
