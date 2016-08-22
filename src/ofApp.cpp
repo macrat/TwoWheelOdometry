@@ -36,7 +36,7 @@ void ofApp::update(){
 		if(speed != 0){
 			pos.x += cos(heading - shift_angle) * shift_length;
 			pos.y += sin(heading - shift_angle) * shift_length;
-			heading += PI/2 - shift_angle;
+			heading += run_angle;
 		}
 	}
 }
